@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker from '../public/_worker.js';
+import worker from './_worker.js';
 const onRequest = ({request, env}) => worker.fetch(request, env);
 const env={RESEND_API_KEY:'test-key',CONTACT_EMAIL:'cara@example.test',EMAIL_FROM:'Bridal Flow <sender@example.test>'};
 const base={name:'Test Visitor',email:'visitor@example.test',weddingDate:'2099-07-15',venue:'Test venue',location:'Bristol',partySize:'12',time:'Morning (8am–10am)',package:'The Connection',style:'Strength and mobility',consent:'on',website:'',notes:'Test only'};

@@ -58,3 +58,16 @@ html{scroll-padding-top:100px}body{overflow-wrap:break-word}.nav-links>a[aria-cu
 @media(min-width:801px) and (max-width:1100px){.nav{gap:10px}.nav-links{gap:12px}.nav-links>a:not(.btn){font-size:10px}.brand .wordmark{font-size:27px}.brand .descriptor{letter-spacing:.2em}}
 @media(max-width:800px){.hero-photo{height:auto;min-height:0;aspect-ratio:3/2}.hero-photo img{height:100%;object-position:center}.bio-art{padding:20px}.gallery-tiles{gap:12px}.gallery-tiles figure:first-child{aspect-ratio:3/2}.gallery-tiles figcaption{font-size:10px;padding:25px 10px 10px}.page-hero h1{font-size:clamp(2.9rem,10vw,5rem)}.photo-card{height:auto}.split-image{height:auto;aspect-ratio:3/2}}
 @media(max-width:480px){.gallery-tiles{grid-template-columns:1fr}.gallery-tiles figure:first-child{grid-column:auto}.hero-copy{padding-top:48px}.hero-photo .overlay-note{bottom:16px;right:16px;font-size:8px}.bio-art{height:auto;padding:14px}.gallery-tiles figcaption{font-size:12px}}
+
+
+.page-hero.experience-intro {
+  padding-block: clamp(42px, 6vw, 80px);
+}
+
+.page-hero h1.experience-label {
+  margin: 0 0 16px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .25em;
+}

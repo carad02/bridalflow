@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "test": "node scripts/check.mjs && node --test tests/*.test.mjs",
-    "check": "node scripts/check.mjs"
+    "build": "node build.mjs",
+    "test": "node check.mjs && node --test enquire.test.mjs",
+    "check": "node check.mjs"
   },
   "engines": {
     "node": ">=22"

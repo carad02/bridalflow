@@ -1,7 +1,7 @@
 import {readFile, readdir, access} from 'node:fs/promises';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-const root=fileURLToPath(new URL('../public/',import.meta.url));
+const root=fileURLToPath(new URL('./',import.meta.url));
 const required=['index.html','experience.html','packages.html','about.html','gallery.html','faq.html','contact.html','privacy.html','terms.html','404.html','styles.css','site.js','_worker.js','_routes.json'];
 const failures=[];
 async function check(ref, from) {
