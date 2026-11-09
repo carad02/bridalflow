@@ -22,7 +22,7 @@
     })
     .catch(()=>{
       submit.textContent='Online enquiries unavailable';
-      show('Online enquiries are not available yet. You can fill in your plans and save a copy below; this will not send them to Cara.',true);
+      show('Online enquiries are not available yet. You can fill in your plans and save a copy below; this will not send them to me.',true);
     });
   document.getElementById('saveEnquiry')?.addEventListener('click',()=>{
     const data=new FormData(form);
@@ -30,7 +30,7 @@
     const text='Bridal Flow — enquiry copy (not sent)\n\n'+Object.entries(labels).map(([key,label])=>`${label}: ${data.get(key)||'—'}`).join('\n\n');
     const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download='Bridal_Flow_Enquiry.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-    show('Your enquiry copy has been prepared for download. This does not send it to Cara.');
+    show('Your enquiry copy has been prepared for download. This does not send it to me.');
   });
   form.addEventListener('submit',async e=>{
     e.preventDefault();if(submit.disabled || !form.reportValidity()) return;
@@ -40,10 +40,10 @@
       const response=await fetch('/api/enquire',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});
       const result=await response.json().catch(()=>null);
       if(!response.ok || result?.ok!==true) throw new Error(result?.error||'Your enquiry could not be sent. Please save a copy and try again later.');
-      show('Thank you — your enquiry has been submitted. Cara will reply personally. Your date is not reserved until your booking is agreed.');
+      show('Thank you — your enquiry has been submitted. I’ll reply personally. Your date is not reserved until your booking is agreed.');
       form.reset();
     } catch(error) {
-      show(error.name==='TimeoutError'?'The connection timed out. Delivery is uncertain; please save a copy before trying again.':error.message||'We couldn’t send your enquiry. Please save a copy and try again later.',true);
+      show(error.name==='TimeoutError'?'The connection timed out. Delivery is uncertain; please save a copy before trying again.':error.message||'Your enquiry could not be sent. Please save a copy and try again later.',true);
     } finally {submit.disabled=false;submit.textContent='Send wedding enquiry';form.removeAttribute('aria-busy');}
   });
 })();

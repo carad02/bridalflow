@@ -55,7 +55,7 @@ async function onRequest({request, env}) {
     if (!response.ok || !result?.id) throw new Error('Email provider did not accept enquiry');
     return reply(200, {ok:true});
   } catch {
-    return reply(502, {error:'We couldn’t send your enquiry. Your details are still in the form. Please save a copy and try again later.'});
+    return reply(502, {error:'Your enquiry could not be sent. Your details are still in the form. Please save a copy and try again later.'});
   }
 }
 
