@@ -1,7 +1,8 @@
 // Cloudflare Pages advanced-mode handler. Credentials stay in Cloudflare secrets.
 const packages = new Set(['The Pause', 'The Connection', 'The Full Flow', 'Not sure yet']);
 const times = new Set(['Early morning (before 8am)', 'Morning (8am–10am)', 'Late morning (after 10am)', 'Flexible / not sure']);
-const styles = new Set(['Let’s decide together', 'Slow and relaxing', 'Strength and mobility', 'A mixture of both']);
+const energisingStyle = 'Energising and Uplifting';
+const styles = new Set(['Let’s decide together', 'Slow and relaxing', energisingStyle, 'A mixture of both']);
 const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 const headers = {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 const reply = (status, body, extra={}) => new Response(JSON.stringify(body), {status, headers:{...headers,...extra}});
@@ -35,7 +36,11 @@ async function onRequest({request, env}) {
   const name=field(data.name,90), email=field(data.email,160), phone=field(data.phone,45);
   const date=field(data.weddingDate,10), venue=field(data.venue,160), location=field(data.location,130);
   const party=Number(data.partySize), time=field(data.time,90), pkg=field(data.package,80);
-  const style=field(data.style,80) || 'Let’s decide together', notes=field(data.notes,1500);
+  const submittedStyle = field(data.style, 80);
+  const style = submittedStyle === 'Strength and mobility'
+    ? energisingStyle
+    : submittedStyle || 'Let’s decide together';
+  const notes = field(data.notes, 1500);
   const parsed=new Date(date+'T12:00:00Z');
   const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   const validDate=/^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0,10)===date && date>=today;
